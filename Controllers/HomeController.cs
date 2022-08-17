@@ -4,6 +4,13 @@ using ExemploAspNetMvc.Models;
 
 namespace ExemploAspNetMvc.Controllers;
 
+// UserDto, UserCreateDto, UseForm, UserPostRequest
+public class UserRequest
+{
+    public string Nome { get; set; }
+    public string Email { get; set; }
+}
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -19,6 +26,21 @@ public class HomeController : Controller
     }
 
     public IActionResult PrimeiraAction()
+    {
+        return View();
+    }
+
+    public string TesteQueryString([FromQuery] string q, string nome)
+    {
+        return $"Chegou aqui {q} e {nome}";
+    }
+
+    public string TesteForm([FromForm] UserRequest userRequest)
+    {
+        return $"Nome: {userRequest.Nome}, Email: {userRequest.Email}";
+    }
+
+    public IActionResult Form()
     {
         return View();
     }
